@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const SIDEBAR_OPEN = 'SIDEBAR_OPEN';
 export const SIDEBAR_CLOSE = 'SIDEBAR_CLOSE';
 export const GET_PRODUCTS_BEGIN = 'GET_PRODUCTS_BEGIN';
@@ -28,5 +30,19 @@ export const closeSidebar = () => {
 export const openSidebar = () => {
   return {
     type: SIDEBAR_OPEN,
+  };
+};
+
+export const fetchProducts = (url) => {
+  return (dispatch) => {
+    dispatch({ type: GET_PRODUCTS_BEGIN });
+    axios
+      .get(url)
+      .then((res) =>
+        dispatch({ type: GET_PRODUCTS_SUCCESS, payload: res.data })
+      )
+      .catch((error) =>
+        dispatch({ type: GET_PRODUCTS_ERROR, payload: error.message })
+      );
   };
 };
