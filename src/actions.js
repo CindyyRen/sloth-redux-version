@@ -33,6 +33,40 @@ export const openSidebar = () => {
   };
 };
 
+export const setGridView = () => {
+  return { type: SET_GRIDVIEW };
+};
+
+export const setListView = () => {
+  return { type: SET_LISTVIEW };
+};
+
+export const updateSort = (value) => {
+  return { type: UPDATE_SORT, payload: value };
+};
+export const loadProducts = (value) => {
+  return { type: LOAD_PRODUCTS, payload: value };
+};
+export const updateFilters = (e) => {
+  let name = e.target.name;
+  let value = e.target.value;
+  if (name === 'category') {
+    value = e.target.textContent;
+  }
+  if (name === 'color') {
+    value = e.target.dataset.color;
+  }
+  if (name === 'price') {
+    value = Number(value);
+  }
+  if (name === 'shipping') {
+    value = e.target.checked;
+  }
+  return { type: UPDATE_FILTERS, payload: { name, value } };
+};
+export const clearFilters = () => {
+  return { type: CLEAR_FILTERS };
+};
 export const fetchProducts = (url) => {
   return (dispatch) => {
     dispatch({ type: GET_PRODUCTS_BEGIN });
@@ -46,3 +80,23 @@ export const fetchProducts = (url) => {
       );
   };
 };
+export const fetchSingleProduct = (url) => {
+  return async (dispatch) => {
+    dispatch({ type: GET_SINGLE_PRODUCT_BEGIN });
+    try {
+      const res = await axios.get(url);
+      dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: res.data });
+    } catch (error) {
+      dispatch({ type: GET_SINGLE_PRODUCT_ERROR, payload: error.message });
+    }
+  };
+};
+// export const fetchSingleProduct = (url) => async (dispatch) => {
+//   dispatch({ type: GET_SINGLE_PRODUCT_BEGIN });
+//   try {
+//     const res = await axios.get(url);
+//     dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: res.data });
+//   } catch (error) {
+//     dispatch({ type: GET_SINGLE_PRODUCT_ERROR, payload: error.message });
+//   }
+// };

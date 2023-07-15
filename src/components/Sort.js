@@ -1,9 +1,58 @@
-import React from 'react'
-import { BsFillGridFill, BsList } from 'react-icons/bs'
-import styled from 'styled-components'
+import React,{useEffect} from 'react';
+import { BsFillGridFill, BsList } from 'react-icons/bs';
+import { useSelector, useDispatch } from 'react-redux';
+import {SORT_PRODUCTS} from '../actions'
+import styled from 'styled-components';
+import { setGridView, setListView, updateSort } from '../actions';
+
 const Sort = () => {
-  return <h4>sort </h4>
-}
+  const dispatch=useDispatch();
+  const {
+    filtered_products: products,
+    grid_view,
+    sort,
+  } = useSelector((state) => state.filter);
+  useEffect(() => {
+    // dispatch({ type: FILTER_PRODUCTS })
+    dispatch({ type: SORT_PRODUCTS })
+  }, [sort,dispatch])
+
+  return (
+    <Wrapper>
+      <div className="btn-container">
+        <button
+          onClick={() => dispatch(setGridView())}
+          className={`${grid_view ? 'active' : null}`}
+        >
+          <BsFillGridFill />
+        </button>
+        <button
+          onClick={() => dispatch(setListView())}
+          className={`${!grid_view ? 'active' : null}`}
+        >
+          <BsList />
+        </button>
+      </div>
+      <p>{products.length} products found</p>
+      <hr />
+      <form>
+        <label htmlFor="sort">sort by</label>
+        <select
+          name="sort"
+          id="sort"
+          value={sort}
+          onChange={(e) => dispatch(updateSort(e.target.value))}
+          className="sort-input"
+        >
+          <option value="price-lowest">price (lowest)</option>
+          <option value="price-highest">price (highest)</option>
+          <option value="name-a">name (a - z)</option>
+          <option value="name-z">name (z - a)</option>
+        </select>
+      </form>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   display: grid;
@@ -66,6 +115,6 @@ const Wrapper = styled.section`
     font-size: 1rem;
     text-transform: capitalize;
   }
-`
+`;
 
-export default Sort
+export default Sort;

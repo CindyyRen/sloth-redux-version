@@ -15,10 +15,10 @@ const initialState = {
   products_loading: false,
   products_error: null,
   products: [],
-  // featured_products: [],
-  // single_product_loading: false,
-  // single_product_error: false,
-  // single_product: {},
+  featured_products: [],
+  single_product_loading: false,
+  single_product_error: false,
+  single_product: {},
 };
 const products_reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -41,8 +41,22 @@ const products_reducer = (state = initialState, action) => {
     case GET_PRODUCTS_ERROR:
       return {
         ...state,
-        products_loading: false,
+        single_product_loading: false,
         products_error: action.payload,
+      };
+    case GET_SINGLE_PRODUCT_BEGIN:
+      return { ...state, products_loading: true };
+    case GET_SINGLE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        single_product_loading: false,
+        single_product: action.payload,
+      };
+    case GET_SINGLE_PRODUCT_ERROR:
+      return {
+        ...state,
+        single_product_loading: false,
+        single_product_error: action.payload,
       };
     default:
       return state;
