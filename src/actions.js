@@ -21,7 +21,7 @@ export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
 export const TOGGLE_CART_ITEM_AMOUNT = 'TOGGLE_CART_ITEM_AMOUNT';
 export const CLEAR_CART = 'CLEAR_CART';
 export const COUNT_CART_TOTALS = 'COUNT_CART_TOTALS';
-
+//-----------------------------
 export const closeSidebar = () => {
   return {
     type: SIDEBAR_CLOSE,
@@ -40,7 +40,7 @@ export const setGridView = () => {
 export const setListView = () => {
   return { type: SET_LISTVIEW };
 };
-
+//--------------------------
 export const updateSort = (value) => {
   return { type: UPDATE_SORT, payload: value };
 };
@@ -67,6 +67,26 @@ export const updateFilters = (e) => {
 export const clearFilters = () => {
   return { type: CLEAR_FILTERS };
 };
+//----------------------------------
+export const addToCart = (id, color, amount, product) => {
+  return { type: ADD_TO_CART, payload: { id, color, amount, product } };
+};
+export const removeItem = (id) => {
+  return { type: REMOVE_CART_ITEM, payload: id };
+};
+export const toggleAmount = (id, value) => {
+  return {
+    type: TOGGLE_CART_ITEM_AMOUNT,
+    payload: {
+      id,
+      value,
+    },
+  };
+};
+export const clearCart = () => {
+  return { type: CLEAR_CART };
+};
+//-------------------------------
 export const fetchProducts = (url) => {
   return (dispatch) => {
     dispatch({ type: GET_PRODUCTS_BEGIN });

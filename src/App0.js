@@ -25,10 +25,19 @@
 //     </div>
 //   );}
 
-const object={
-  message:"Hello,Wrold",
-  logMessage(){
-    console.log(this.message)
+// const object={
+//   message:"Hello,Wrold",
+//   logMessage(){
+//     console.log(this.message)
+//   }
+// }
+// setTimeout(object.logMessage,1000)
+import React from 'react';
+class EmailButton extends React.Component {
+  render() {
+    return (
+      <a href="mailto:example@example.com">Send Email</a>
+    );
   }
 }
-setTimeout(object.logMessage,1000)
+export default EmailButton

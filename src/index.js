@@ -12,8 +12,10 @@ store.dispatch(fetchProducts(products_url));
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <Provider store={store}>
-    <App />
-    {/* <App0 /> */}
-  </Provider>
+  <>
+    <Provider store={store}>
+      <App />
+      {/* <App0 /> */}
+    </Provider>
+  </>
 );
