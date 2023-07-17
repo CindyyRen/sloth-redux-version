@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import logo from '../assets/logo.svg';
 import { FaBars } from 'react-icons/fa';
@@ -10,6 +10,7 @@ import { openSidebar } from '../actions';
 
 const Nav = () => {
   const dispatch = useDispatch();
+  const { myUser } = useSelector((state) => state.user);
   return (
     <NavContainer>
       <div className="nav-center">
@@ -32,11 +33,11 @@ const Nav = () => {
               </li>
             );
           })}
-          {/* {myUser && (
+          {myUser && (
             <li>
-              <Link to='/checkout'>checkout</Link>
+              <Link to="/checkout">checkout</Link>
             </li>
-          )} */}
+          )}
         </ul>
         <CartButtons />
       </div>

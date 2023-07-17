@@ -11,6 +11,7 @@ import { closeSidebar } from '../actions';
 
 const Sidebar = () => {
   const { isSidebarOpen } = useSelector((state) => state.products);
+  const { myUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   return (
     <SidebarContainer>
@@ -42,13 +43,13 @@ const Sidebar = () => {
               checkout
             </Link>
           </li>
-          {/* {myUser && (
-      <li>
-        <Link to='/checkout' onClick={closeSidebar}>
-          checkout
-        </Link>
-      </li>
-    )} */}
+          {myUser && (
+            <li>
+              <Link to="/checkout" onClick={closeSidebar}>
+                checkout
+              </Link>
+            </li>
+          )}
         </ul>
         <CartButtons />
       </aside>

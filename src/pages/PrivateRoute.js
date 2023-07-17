@@ -1,9 +1,17 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
-// will remove later
+import { Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const PrivateRoute = () => {
-  return <h4>Private Route</h4>;
+const PrivateRoute = ({ children, ...rest }) => {
+  const { myUser } = useSelector((state) => state.user);
+  return (
+    <Route
+      {...rest}
+      render={() => {
+        return myUser ? children : <Redirect to="/"></Redirect>;
+      }}
+    ></Route>
+  );
 };
 export default PrivateRoute;

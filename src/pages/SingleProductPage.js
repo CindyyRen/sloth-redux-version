@@ -20,8 +20,9 @@ const SingleProductPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
+    if(id)
     dispatch(fetchSingleProduct(`${url}${id}`));
-  }, [id]);
+  }, [id, dispatch]);
   const {
     single_product_loading: loading,
     single_product_error: error,
